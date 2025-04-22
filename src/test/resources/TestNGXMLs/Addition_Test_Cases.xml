@@ -1,0 +1,70 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator_Addition_TestCases" parallel="methods" thread-count="2" preserve-order="false">
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="Verify simple integer addition" >
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="30"/>
+                    <include name="simpleAddition"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify integer addition with data provider">
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests">
+                <methods>
+                    <include name="additionWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify double addition">
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests">
+                <methods>
+                    <include name="doubleAddition"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify addition fails">
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="40"/>
+                    <include name="additionNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify addition empty input test">
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests" >
+                <methods>
+                    <parameter name="number1" value=""/>
+                    <parameter name="number2" value=""/>
+                    <include name="additionEmpty" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Retry Failed TCs">
+        <classes>
+            <class name="TestNGHT.Calculator.AdditionTests" >
+                <methods>
+                    <include name="additionFailed" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

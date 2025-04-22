@@ -1,0 +1,60 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator_Multiplication_TestCases" parallel="methods" thread-count="2" preserve-order="false">
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+    <test name="Verify simple integer multiplication">
+        <classes>
+            <class name="TestNGHT.Calculator.MultiplicationTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="200"/>
+                    <include name="simpleMultiplication"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify integer multiplication with data provider">
+        <classes>
+            <class name="TestNGHT.Calculator.MultiplicationTests">
+                <methods>
+                    <include name="MultiplicationWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify double multiplication">
+        <classes>
+            <class name="TestNGHT.Calculator.MultiplicationTests">
+                <methods>
+                    <include name="doubleMultiplication"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify multiplication fails">
+        <classes>
+            <class name="TestNGHT.Calculator.MultiplicationTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="500"/>
+                    <include name="multiplicationNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify addition empty input">
+        <classes>
+            <class name="TestNGHT.Calculator.MultiplicationTests">
+                <methods>
+                    <parameter name="number1" value=""/>
+                    <parameter name="number2" value=""/>
+                    <include name="multiplicationEmpty"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

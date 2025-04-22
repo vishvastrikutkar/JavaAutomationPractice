@@ -1,0 +1,64 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator_Subtraction_TestCases" parallel="methods" thread-count="4">
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+    <test name="Verify simple integer subtraction">
+        <classes>
+            <class name="TestNGHT.Calculator.SubtractionTests">
+                <methods>
+                    <parameter name="number1" value="20"/>
+                    <parameter name="number2" value="10"/>
+                    <parameter name="expectedResult" value="10"/>
+                    <include name="simpleSubtraction"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify integer addition with data provider">
+        <classes>
+            <class name="TestNGHT.Calculator.SubtractionTests">
+                <methods>
+                    <include name="subtractionWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify double subtraction">
+        <classes>
+            <class name="TestNGHT.Calculator.SubtractionTests">
+                <methods>
+                    <include name="doubleSubtraction"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify subtraction fails">
+        <classes>
+            <class name="TestNGHT.Calculator.SubtractionTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="30"/>
+                    <include name="subtractionNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify subtraction with empty input">
+        <classes>
+            <class name="TestNGHT.Calculator.SubtractionTests">
+                <methods>
+                    <parameter name="number1" value=""/>
+                    <parameter name="number2" value=""/>
+                    <include name="subtractionEmpty"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

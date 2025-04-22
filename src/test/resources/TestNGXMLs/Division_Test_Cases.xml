@@ -1,0 +1,71 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator_Division_TestCases" parallel="methods" thread-count="2" preserve-order="false">
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+    <test name="Verify simple integer Division">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <parameter name="number1" value="40"/>
+                    <parameter name="number2" value="20"/>
+                    <parameter name="expectedResult" value="2"/>
+                    <include name="simpleDivision"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify integer Division with data provider">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <include name="DivisionWithDataProvider"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify double Division">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <include name="doubleDivision"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify Division fails">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="5"/>
+                    <parameter name="expectedResult" value="50"/>
+                    <include name="divisionNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify division empty input">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <parameter name="number1" value=""/>
+                    <parameter name="number2" value=""/>
+                    <include name="divisionEmpty"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify division by zero">
+        <classes>
+            <class name="TestNGHT.Calculator.DivisionTests">
+                <methods>
+                    <parameter name="number1" value="10"/>
+                    <parameter name="number2" value="0"/>
+                    <include name="divisionEmpty"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

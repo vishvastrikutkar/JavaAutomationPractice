@@ -1,0 +1,63 @@
+pipeline
+{
+agent any
+stages
+{
+    stage('Checkout Repo')
+    {
+        steps
+        {
+            echo 'This Checkout stage'
+            git branch: 'main', credentialsId: 'dfa253d8-2963-4f95-899b-0f51260e3acd', url: 'https://git.epam.com/vishvas_trikutkar/automationpractice.git'
+        }
+    }
+    stage('Build')
+    {
+        steps
+        {
+            echo 'This Build stage'
+            script
+            {
+                env.PATH = "C:\\apache-maven-3.9.7\\bin;C:\\Program Files\\Java\\jdk-21\\bin;c:\\windows\\system32"
+            }
+            bat label: '', script: 'mvn clean package'
+        }
+    }
+    stage('Parallel Stages')
+     {
+                parallel
+                {
+                         stage('Run Tests on Chrome')
+                         {
+                            steps
+                            {
+                                echo 'Running test cases on chrome'
+                            }
+                         }
+                         stage('Run Tests on Edge')
+                         {
+                            steps
+                            {
+                                echo 'Running test cases on edge'
+                            }
+                         }
+                }
+     }
+    stage('Artifact')
+    {
+        steps
+        {
+            echo 'This Artifact stage'
+            archiveArtifacts 'target/surefire-reports/*.html'
+        }
+    }
+    stage('Send Email')
+    {
+        steps
+        {
+            echo 'This Send Email stage'
+        }
+    }
+  }
+}
+

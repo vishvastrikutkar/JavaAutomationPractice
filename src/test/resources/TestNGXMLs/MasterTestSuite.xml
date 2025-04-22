@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator Test cases" parallel="methods" thread-count="4">
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+    <suite-files>
+        <suite-file path="Addition_Test_Cases.xml"/>
+        <suite-file path="Subtraction_Test_Cases.xml"/>
+        <suite-file path="Multiplication_Test_Cases.xml"/>
+        <suite-file path="Division_Test_Cases.xml"/>
+    </suite-files>
+</suite>

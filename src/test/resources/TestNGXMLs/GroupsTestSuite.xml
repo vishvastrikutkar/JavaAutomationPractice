@@ -1,0 +1,49 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator TestCases" parallel="methods" thread-count="4">
+
+    <listeners>
+        <listener class-name="TestNGHT.Listener.TestListener"/>
+        <listener class-name="TestNGHT.Calculator.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="Calculator Tests">
+    <groups>
+        <define name="Sanity">
+            <include name="Sanity"/>
+        </define>
+        <define name="Regression">
+            <include name="Sanity"/>
+            <include name="Addition"/>
+            <include name="Subtraction"/>
+            <include name="Multiplication"/>
+            <include name="Division"/>
+        </define>
+        <run>
+            <include name="Regression"/>
+            <!--<exclude name="Division"/>-->
+        </run>
+    </groups>
+    <classes>
+        <class name="TestNGHT.Calculator.AdditionTests">
+            <parameter name="number1" value="10"/>
+            <parameter name="number2" value="20"/>
+            <parameter name="expectedResult" value="30"/>
+        </class>
+        <class name="TestNGHT.Calculator.SubtractionTests">
+            <parameter name="number1" value="20"/>
+            <parameter name="number2" value="10"/>
+            <parameter name="expectedResult" value="10"/>
+        </class>
+        <class name="TestNGHT.Calculator.MultiplicationTests">
+            <parameter name="number1" value="10"/>
+            <parameter name="number2" value="20"/>
+            <parameter name="expectedResult" value="200"/>
+        </class>
+        <class name="TestNGHT.Calculator.DivisionTests">
+            <parameter name="number1" value="40"/>
+            <parameter name="number2" value="20"/>
+            <parameter name="expectedResult" value="2"/>
+        </class>
+    </classes>
+    </test>
+</suite>
